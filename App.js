@@ -1,162 +1,144 @@
-import logo from './logo.svg';
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState } from 'react';
+import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css'
+const dishes = [
+  {
+    name: 'Блюдо 1',
+    image: 'https://mykaleidoscope.ru/x/uploads/posts/2022-09/1663702360_48-mykaleidoscope-ru-p-krasivaya-podacha-blyud-instagram-51.jpg',
+    weight: '150 г',
+    composition: 'Ингредиенты: ингредиент 1, ингредиент 2',
+    price: 'Цена: 600 рублей',
+  },
+  {
+    name: 'Блюдо 2',
+    image: 'https://mykaleidoscope.ru/x/uploads/posts/2022-09/1663769339_15-mykaleidoscope-ru-p-populyarnie-restorannie-blyuda-yeda-krasiv-16.jpg',
+    weight: '200 г',
+    composition: 'Ингредиенты: ингредиент 3, ингредиент 4',
+    price: 'Цена: 720 рублей',
+  },
+  {
+    name: 'Блюдо 3',
+    image: 'https://yoga-in-greece.ru/wp-content/uploads/e/1/5/e156a8b298c7a7b172be4e5e194d68f9.jpeg',
+    weight: '180 г',
+    composition: 'Ингредиенты: ингредиент 5, ингредиент 6',
+    price: 'Цена: 990 рублей',
+  },
+  {
+    name: 'Блюдо 4',
+    image: 'https://i9.photo.2gis.com/images/branch/0/30258560073084660_4a03.jpg',
+    weight: '150 г',
+    composition: 'Ингредиенты: ингредиент 7, ингредиент 8',
+    price: 'Цена: 590 рублей',
+  },
+  {
+    name: 'Блюдо 5',
+    image: 'https://mykaleidoscope.ru/x/uploads/posts/2022-09/1663834740_2-mykaleidoscope-ru-p-restorannie-blyuda-yeda-vkontakte-4.jpg',
+    weight: '200 г',
+    composition: 'Ингредиенты: ингредиент 3, ингредиент 4',
+    price: 'Цена: 690 рублей',
+  },
+  {
+    name: 'Блюдо 6',
+    image: 'https://fotosdm.ru/wp-content/uploads/2020/04/img9431.jpg',
+    weight: '180 г',
+    composition: 'Ингредиенты: ингредиент 5, ингредиент 6',
+    price: 'Цена: 890 рублей',
+  },
+  {
+    name: 'Блюдо 7',
+    image: 'https://www.ivetta.ua/wp-content/uploads/2021/03/4-zamechatelnyh-blyuda-s-mocarelloj.jpg',
+    weight: '150 г',
+    composition: 'Ингредиенты: ингредиент 1, ингредиент 2',
+    price: 'Цена: 600 рублей',
+  },
+  {
+    name: 'Блюдо 8',
+    image: 'https://adonius.club/uploads/posts/2022-08/1659631355_11-adonius-club-p-podacha-blyud-v-restorane-krasivo-foto-11.jpg',
+    weight: '200 г',
+    composition: 'Ингредиенты: ингредиент 3, ингредиент 4',
+    price: 'Цена: 720 рублей',
+  },
+  {
+    name: 'Блюдо 9',
+    image: 'https://kartinki.pics/uploads/posts/2021-04/1617246443_52-p-firmennoe-blyudo-krasivo-54.jpg',
+    weight: '180 г',
+    composition: 'Ингредиенты: ингредиент 5, ингредиент 6',
+    price: 'Цена: 990 рублей',
+  }
+];
 
-function Avatar({ person, size = 350 }) {
-    const [isMenuShown, setIsMenuShown] = useState(false);
-    const toggleMenu = () => {
-        setIsMenuShown(current => !current);
-    };
 
-    return (
-        <div className="avatar-container">
-            <img
-                className="avatar"
-                src={person.imageId}
-                alt={person.name}
-                width={size}
-                height={size - 80}
-            />
-            <p className="avatar-name">{person.name}</p>
-            <button onClick={toggleMenu}>Подробнее</button>
-            {isMenuShown && (
-                <div className="additional-menu">
-                    <Box about={person.about} />
-                </div>
-            )}
-        </div>
-    );
-}
-function Box({ about }) {
-    return (
-        <div className="box-menu">
-            <p>{about}</p>
-        </div>
-    );
-}
-function Avatar2({ person, size = 450 }) {
-    const [isMenuShown, setIsMenuShown] = useState(false);
-
-    const toggleMenu = () => {
-        setIsMenuShown(!isMenuShown);
-    };
-
-
-    return (
-        <div className="avatar-container">
-            <img
-                className="avatar"
-                src={person.imageId}
-                alt={person.name}
-                width={size}
-                height={size - 170}
-            />
-            <p className="avatar-name">{person.name}</p>
-            <button onClick={toggleMenu}>Подробнее</button>
-            {isMenuShown && (
-                <div className="additional-menu" style={{}}>
-                    <Box about={person.about} />
-                </div>
-            )}
-        </div>
-    );
-}
 function App() {
-    return (
-        <div>
-            <nav class="navbar navbar-dark bg-dark" style={{ backgroundColor: '#d9d4d9' }}>
-  <a class="navbar-brand" href="#">
-    RESTORANTE
-  </a>
-</nav>
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark" style={{ backgroundColor: '#d9d4d9', padding: '25px' }}>
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarBottom"
-                        aria-controls="navbarBottom" aria-expanded="false" aria-label="Toggle navigation" style={{ backgroundColor: '#484548' }}>
-                    <span className="navbar-toggler-icon"></span>
-                </button>
+  const [showMenu, setShowMenu] = useState(false);
+  const [expandedDishDetails, setExpandedDishDetails] = useState(Array(dishes.length).fill(false));
 
-                <div className="collapse navbar-collapse" id="navbarBottom" style={{ marginLeft: '35%' }}>
-                    <ul className="navbar-nav mr-auto">
-                        <li className="nav-item active">
-                            <a className="nav-link" href="#">Основное меню</a>
-                        </li>
-                        <li className="nav-item active">
-                            <a className="nav-link" href="#">Акции</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">Контакты</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">О компании</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-            <h1 style={{backgroundColor:'#0000'}}>Завтраки</h1>
-            <div className="avatar-row">
-                <Avatar
-                    person={{
-                        name: 'Картофельная вафля с беконом',
-                        imageId:
-                            'https://shoko.ru/upload/iblock/bd0/ft05zea9m6fy0jvl2lasmsnc50k6id8j.jpg',
-                        about: '450 ₽'
-                    }}
+  const toggleMenu = () => {
+    setShowMenu(!showMenu);
+  };
+
+  const toggleAllDishDetails = () => {
+    setExpandedDishDetails((prevState) => prevState.map(() => true)); // Открываем детали для всех блюд
+  };
+
+  const renderDishesTable = () => {
+    const rows = [];
+    for (let i = 0; i < dishes.length; i += 3) {
+      const row = dishes.slice(i, i + 3);
+      rows.push(
+        <div key={i} className="row">
+          {row.map((dish, index) => (
+            <div key={index} className="col-md-4">
+              <div className="dish-card">
+                <hr className="my-1" />
+                <img
+                  src={dish.image}
+                  alt={dish.name}
+                  className="rounded-circle"
+                  style={{ maxWidth: '100%', height: 'auto' }}
                 />
-                <Avatar
-                    person={{
-                        name: 'Боул с индейкой',
-                        imageId:
-                            'https://shoko.ru/upload/iblock/bff/pgbajmio505dcln1dn8tn91x2q7wioxj.jpg',
-                        about: '450 ₽'
-                    }}
-                />
-                <Avatar
-                    person={{
-                        name: 'Драники с беконом и яйцом пашот',
-                        imageId:
-                            'https://shoko.ru/upload/iblock/815/42ehkvv2ursx1380ok1rb75fsulg2dm9.jpg',
-                        about: '450 ₽'
-                    }}
-                />
-                <Avatar
-                    person={{
-                        name: 'Картофельная вафля с лососем',
-                        imageId:
-                            'https://shoko.ru/upload/iblock/ce1/9hgnm5uhreccusp2bo6b7n0zoqxm5rm0.jpg',
-                        about: '550 ₽'
-                    }}
-                />
+                <h3>{dish.name}</h3>
+                <p>Граммовка: {dish.weight}</p>
+                <hr className="my-1" />
+                {expandedDishDetails[i + index] && (
+                  <div className="dish-details">
+                    <p>{dish.composition}</p>
+                    <p>{dish.price}</p>
+                  </div>
+                )}
+              </div>
             </div>
-            <h1 style={{paddingLeft: '669px'}}>Обеды</h1>
-            <div className="avatar-row">
-                <Avatar2
-                    person={{
-                        name: 'Паста Альфредо с курицей',
-                        imageId:
-                            'https://shoko.ru/upload/iblock/b4f/avz2wh39eq8ld3k0lw7vsk5iebzora98.jpg',
-                        about: '450 ₽'
-                    }}
-                />
-                <Avatar2
-                    person={{
-                        name: 'Гуляш из свинины',
-                        imageId:
-                            'https://shoko.ru/upload/iblock/9b4/jkam7q88tv7v0l2as2zd32gp6n697oll.jpg',
-                        about: '390 ₽'
-                    }}
-                />
-                <Avatar2
-                    person={{
-                        name: 'Бефстроганов с картофельным пюре',
-                        imageId:
-                            'https://shoko.ru/upload/iblock/08f/gre7ejvax1ho0vg5nt90avesw53s70k2.jpg',
-                        about: '450 ₽'
-                    }}
-                />
-            </div>
+          ))}
         </div>
-    );
+      );
+    }
+    return rows;
+  };
+
+  return (
+    <div className="App">
+      <nav>
+        <div className="btn-group" style={{ width: '100%' }}>
+          <button className="btn btn-block" onClick={toggleMenu}>
+            Меню
+          </button>
+          <button className="btn btn-block btn-danger" onClick={() => alert("Приходите позже")}>
+            Ресторан "В самое яблочко"
+          </button>
+          <button className="btn btn-block btn-primary" onClick={() => alert("Информация об авторе всех наших прекрасных блюд скоро появится!")}>
+            Шеф-повар
+          </button>
+        </div>
+      </nav>
+      {showMenu && (
+        <div>
+          <button className="btn btn-primary" onClick={toggleAllDishDetails}>
+            Подробнее
+          </button>
+          {renderDishesTable()}
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default App;
