@@ -1,72 +1,43 @@
 import React, { useState } from 'react';
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css'
+import a from './images/dish2.jpg'
+import b from './images/фото2.jpg'
+import c from './images/фото3.jpg'
+import d from './images/фото4.jpg'
+
+
+
+
 const dishes = [
   {
-    name: 'Блюдо 1',
-    image: 'https://mykaleidoscope.ru/x/uploads/posts/2022-09/1663702360_48-mykaleidoscope-ru-p-krasivaya-podacha-blyud-instagram-51.jpg',
-    weight: '150 г',
-    composition: 'Ингредиенты: ингредиент 1, ингредиент 2',
-    price: 'Цена: 600 рублей',
+    name: 'Курочка с картошечкой',
+    image: a,
+    weight: '300 г',
+    composition: 'Ингредиенты: курица 2, картошка 2',
+    price: 'Цена: $10',
   },
   {
-    name: 'Блюдо 2',
-    image: 'https://mykaleidoscope.ru/x/uploads/posts/2022-09/1663769339_15-mykaleidoscope-ru-p-populyarnie-restorannie-blyuda-yeda-krasiv-16.jpg',
-    weight: '200 г',
-    composition: 'Ингредиенты: ингредиент 3, ингредиент 4',
-    price: 'Цена: 720 рублей',
+    name: 'Мяско из духовки',
+    image: b,
+    weight: '600 г',
+    composition: 'Ингредиенты: духовка 1, мяско много',
+    price: 'Цена: $15',
   },
   {
-    name: 'Блюдо 3',
-    image: 'https://yoga-in-greece.ru/wp-content/uploads/e/1/5/e156a8b298c7a7b172be4e5e194d68f9.jpeg',
-    weight: '180 г',
-    composition: 'Ингредиенты: ингредиент 5, ингредиент 6',
-    price: 'Цена: 990 рублей',
+    name: 'Рыбка с картошечкой',
+    image: c,
+    weight: '500 г',
+    composition: 'Ингредиенты: рыбка 1, картошка 3',
+    price: 'Цена: $25',
   },
   {
-    name: 'Блюдо 4',
-    image: 'https://i9.photo.2gis.com/images/branch/0/30258560073084660_4a03.jpg',
-    weight: '150 г',
-    composition: 'Ингредиенты: ингредиент 7, ингредиент 8',
-    price: 'Цена: 590 рублей',
-  },
-  {
-    name: 'Блюдо 5',
-    image: 'https://mykaleidoscope.ru/x/uploads/posts/2022-09/1663834740_2-mykaleidoscope-ru-p-restorannie-blyuda-yeda-vkontakte-4.jpg',
-    weight: '200 г',
-    composition: 'Ингредиенты: ингредиент 3, ингредиент 4',
-    price: 'Цена: 690 рублей',
-  },
-  {
-    name: 'Блюдо 6',
-    image: 'https://fotosdm.ru/wp-content/uploads/2020/04/img9431.jpg',
-    weight: '180 г',
-    composition: 'Ингредиенты: ингредиент 5, ингредиент 6',
-    price: 'Цена: 890 рублей',
-  },
-  {
-    name: 'Блюдо 7',
-    image: 'https://www.ivetta.ua/wp-content/uploads/2021/03/4-zamechatelnyh-blyuda-s-mocarelloj.jpg',
-    weight: '150 г',
-    composition: 'Ингредиенты: ингредиент 1, ингредиент 2',
-    price: 'Цена: 600 рублей',
-  },
-  {
-    name: 'Блюдо 8',
-    image: 'https://adonius.club/uploads/posts/2022-08/1659631355_11-adonius-club-p-podacha-blyud-v-restorane-krasivo-foto-11.jpg',
-    weight: '200 г',
-    composition: 'Ингредиенты: ингредиент 3, ингредиент 4',
-    price: 'Цена: 720 рублей',
-  },
-  {
-    name: 'Блюдо 9',
-    image: 'https://kartinki.pics/uploads/posts/2021-04/1617246443_52-p-firmennoe-blyudo-krasivo-54.jpg',
-    weight: '180 г',
-    composition: 'Ингредиенты: ингредиент 5, ингредиент 6',
-    price: 'Цена: 990 рублей',
+    name: 'Мясо с овощами',
+    image: d,
+    weight: '1000 г',
+    composition: 'Ингредиенты: мясо 1, овощи много',
+    price: 'Цена: $100',
   }
 ];
-
 
 function App() {
   const [showMenu, setShowMenu] = useState(false);
@@ -76,8 +47,8 @@ function App() {
     setShowMenu(!showMenu);
   };
 
-  const toggleAllDishDetails = () => {
-    setExpandedDishDetails((prevState) => prevState.map(() => true)); // Открываем детали для всех блюд
+  const toggleDishDetails = () => {
+    setExpandedDishDetails((prevState) => prevState.map(() => true));
   };
 
   const renderDishesTable = () => {
@@ -99,7 +70,13 @@ function App() {
                 <h3>{dish.name}</h3>
                 <p>Граммовка: {dish.weight}</p>
                 <hr className="my-1" />
-                {expandedDishDetails[i + index] && (
+                <button
+                  className="btn btn-primary"
+                  onClick={() => toggleDishDetails(index)}
+                >
+                  Подробнее
+                </button>
+                {expandedDishDetails[index] && (
                   <div className="dish-details">
                     <p>{dish.composition}</p>
                     <p>{dish.price}</p>
@@ -121,22 +98,15 @@ function App() {
           <button className="btn btn-block" onClick={toggleMenu}>
             Меню
           </button>
-          <button className="btn btn-block btn-danger" onClick={() => alert("Приходите позже")}>
-            Ресторан "В самое яблочко"
+          <button className="btn btn-block btn-danger" onClick={() => alert("Раздел 'О ресторане' в разработке")}>
+            Ресторан "Веселье"
           </button>
-          <button className="btn btn-block btn-primary" onClick={() => alert("Информация об авторе всех наших прекрасных блюд скоро появится!")}>
-            Шеф-повар
+          <button className="btn btn-block btn-primary" onClick={() => alert("Раздел 'Об авторе' в разработке")}>
+            Об авторе
           </button>
         </div>
       </nav>
-      {showMenu && (
-        <div>
-          <button className="btn btn-primary" onClick={toggleAllDishDetails}>
-            Подробнее
-          </button>
-          {renderDishesTable()}
-        </div>
-      )}
+      {showMenu && renderDishesTable()}
     </div>
   );
 }
